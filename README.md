@@ -22,3 +22,7 @@ Let's walk through it:
 
 In your `.env` file, you'll need to set the `STYTCH_PROJECT_ID` and `STYTCH_SECRET`. We don't need the public token because not using any frontend sdk.
 
+A few more notes for you: 
+- In your `.env` file, you'll need to set the `STYTCH_PROJECT_ID` and `STYTCH_SECRET`. We don't need the public token because not using any frontend sdk.
+- We use a stytch singleton in `lib/server` and added a path alias in `svelte.config.js`. In svelte kit, this is a reserved directory for anything you want to only be on the server.
+- There are bunch of tailwind/ui things in this project just to get some nice defaults. If you want a good way to scaffold a svelte kit project with nice path aliases and tailwind, you can use this (https://www.shadcn-svelte.com/docs/installation)[https://www.shadcn-svelte.com/docs/installation].
