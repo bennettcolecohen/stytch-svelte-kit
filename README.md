@@ -15,3 +15,8 @@ Let's walk through it:
 - All private page routes are in the `(private)/` directory. The parent load function in `+layout.server.ts` simply checks for a session in `locals`. If there is none, we redirect to the sign in page.
 
 - In the sign out route, we revoke the session and then (redundantly) set a cookie that expires immediately.
+
+—————
+
+In your `.env` file, you'll need to set the `STYTCH_PROJECT_ID` and `STYTCH_SECRET`. We don't need the public token because not using any frontend sdk.
+
