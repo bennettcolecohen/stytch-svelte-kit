@@ -6,7 +6,7 @@
 	const handler = async (e) => {
 		console.log('boom');
 		// make the request to the sign out route
-		await fetch('/api/auth/sign-out', {
+		await fetch('/api/v1/auth/sign-out', {
 			method: 'POST'
 		});
 

@@ -15,7 +15,7 @@
 	const handler = async (e) => {
 		// call the sign in route
 		loading = true;
-		const response = await fetch('/api/auth/sign-in', {
+		const response = await fetch('/api/v1/auth/sign-in', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

@@ -1,38 +1,17 @@
-# create-svelte
+# Stytch Svelte Kit Example
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+There were no docs on how to integrate Stytch properly into a svelte kit app, so I thought it would be useful to make a community example. This is for Stytch B2B Auth.
 
-## Creating a project
+At the highest level, we're only going to use the Stytch Node SDK and not touch any of the frontend SDKs because they don't play nicely with svelte kit's dual environment setup. We'll handle all auth functions on the server and then pass things to the client when needed.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Let's walk through it:
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+- For now, we've just done magic links with a simple form and sign in route.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- We set the redirect url in the Stytch Dashboard to `api/v1/authenticate` where we mint a new session. We pass the session token back to the client with a `set-cookie` header.
 
-## Developing
+- On every request, we get that cookie and authenticate the session. This will give us the session, organization, and member data. This info is put into `event.locals` so we can easily access it on the server. This is in `hook.server.ts`
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- All private page routes are in the `(private)/` directory. The parent load function in `+layout.server.ts` simply checks for a session in `locals`. If there is none, we redirect to the sign in page.
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- In the sign out route, we revoke the session and then (redundantly) set a cookie that expires immediately.
