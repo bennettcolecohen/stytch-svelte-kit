@@ -4,6 +4,8 @@ There were no docs on how to integrate Stytch properly into a svelte kit app, so
 
 At the highest level, we're only going to use the Stytch Node SDK and not touch any of the frontend SDKs because they don't play nicely with svelte kit's dual environment setup. We'll handle all auth functions on the server and then pass things to the client when needed.
 
+This is meant to just be a template. There is a lot of logic I left out, especially with error handling. The actual sign in flow is where you'll want to customize things for using org specific/discovery, slugs, etc. 
+
 Let's walk through it:
 
 - For now, we've just done magic links with a simple form and sign in route.
