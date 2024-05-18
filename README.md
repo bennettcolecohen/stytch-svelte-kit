@@ -14,7 +14,7 @@ Let's walk through it:
 
 - On every request, a handler is run in `hooks.server.ts`. We get the `stytch_session` cookie containing the session token and authenticate it. This will give us the session, organization, and member data. This info is put into `event.locals` so we can easily access it on the server. This is in `hook.server.ts`. 
 
-- All private page routes are in the `(private)/` directory. The parent load function in `+layout.server.ts` simply checks for a session in `locals`. If there is none, we redirect to the sign-in page. 
+- All private page routes are in the `(private)/` directory. The parent load function in `+layout.server.ts` simply checks for a session in `locals`. If there is none, we redirect to the sign-in page. If there is, the load function returns the session data from locals so we can access across the frontend.
 
 - In the sign out route, we revoke the session and then set a session token cookie to expire immediately.
 
